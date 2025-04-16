@@ -226,12 +226,42 @@ docker-compose.yml
 ## Fichier : flask-soft/Dockerfile
 ```dockerfile
 FROM python:3.11-alpine
+
+# Eviter l'écriture de fichiers pyc + affichage live dans le terminal
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Installation des dépendances système
+RUN apk update && apk add --no-cache \
+    build-base \
+    python3-dev \
+    libffi-dev \
+    musl-dev \
+    gcc \
+    jpeg-dev \
+    zlib-dev \
+    postgresql-dev \
+    mariadb-dev \
+    linux-headers
+
+# Dossier de travail
 WORKDIR /app
+
+# Copier requirements en premier pour profiter du cache
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+
+# Installer les dépendances
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copier tout le reste du code
 COPY . .
-EXPOSE 9090
-CMD ["gunicorn", "--bind", "0.0.0.0:9090", "app:app"]
+
+# Port exposé : 8080 (selon les besoins du client)
+EXPOSE 8080
+
+# Lancement de l’app avec Gunicorn en mode production
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "run:app"]
 ```
 
 # Commande de build :
@@ -241,17 +271,40 @@ docker build -t flask-app:1.0 ./flask-soft
 
 🔐 .dockerignore
 ```dockerfile
+ docker
+# Python
 __pycache__/
 *.py[cod]
 *.log
-.env
+*.sqlite3
+*.env
+*.db
+*.swp
+*.bak
+
+# Environnement virtuel
 venv/
-instance/
+env/
+
+# IDE & outils
+.vscode/
+.idea/
+.mypy_cache/
+
+# Node.js (si jamais intégré pour frontend)
 node_modules/
+
+# Git
 .git/
 .gitignore
+
+# Media & statiques générés
+media/
+static/
+
+# Docker
 Dockerfile
-docker-compose.yml
+.dockerignore
 ```
 
 ## 🌐 Ingress Kubernetes
@@ -300,9 +353,9 @@ spec:
 127.0.0.1 projet.local
 ```
 
-## 📦 Déploiement des applications Kubernetes
+# 📦 Déploiement des applications Kubernetes
 
-### ⚙️ Déploiement de l'application Node.js (port 8080)
+## ⚙️ Déploiement de l'application Node.js (port 8080)
 
 **Fichier : `k8s/node-deployment.yaml`**
 
@@ -328,7 +381,7 @@ spec:
             - containerPort: 8080
 ```
 
-# Fichier : k8s/node-service.yaml
+Fichier : k8s/node-service.yaml
 
 ```yaml
 apiVersion: v1
@@ -345,8 +398,8 @@ spec:
       nodePort: 30080
 ```
 
-⚙️ Déploiement de l'application statique NGINX (port 9090)
-# Fichier : k8s/nginx-deployment.yaml
+## ⚙️ Déploiement de l'application statique NGINX (port 9090)
+Fichier : k8s/nginx-deployment.yaml
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -407,4 +460,3 @@ k apply -f k8s/flask-service.yml
 # Déployer l'Ingress
 k apply -f k8s/ingress.yml
 ```
-
