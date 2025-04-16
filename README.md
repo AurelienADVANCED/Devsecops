@@ -87,82 +87,43 @@ minikube addons enable ingress
 **Fichier : django-volt/Dockerfile**
 
 ```dockerfile
-FROM python:3.9
+FROM python:3.11-alpine
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Eviter l'écriture de fichiers pyc + affichage live dans le terminal
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-COPY requirements.txt .
-# install python dependencies
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Installation des dépendances système
+RUN apk update && apk add --no-cache \
+    build-base \
+    python3-dev \
+    libffi-dev \
+    musl-dev \
+    gcc \
+    jpeg-dev \
+    zlib-dev \
+    postgresql-dev \
+    mariadb-dev \
+    linux-headers
 
-COPY . .
-
-# Set UP
-RUN python manage.py collectstatic --no-input
-RUN python manage.py makemigrations
-RUN python manage.py migrate
-
-#__API_GENERATOR__
-#__API_GENERATOR__END
-
-# Start Server
-EXPOSE 5005
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
-```
-
-## 🚀 Optimisation de l'image Docker Django
-
-Afin de produire une image **plus légère, plus rapide à déployer et plus sécurisée**, l’image Docker de l’application Django a été optimisée à l’aide d’un **build multi-étapes**.
-
-### 🧱 Étape 1 : Build intermédiaire avec compilation
-
-```dockerfile
-FROM python:3.9-slim AS builder
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-WORKDIR /app
-COPY requirements.txt .
-
-# Installation des outils de compilation + dépendances
-RUN apt-get update \
-  && apt-get install -y build-essential gcc \
-  && pip install --upgrade pip \
-  && pip install --user --no-warn-script-location --no-cache-dir -r requirements.txt \
-  && apt-get remove -y build-essential gcc \
-  && apt-get autoremove -y \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-```
-### 📦 Étape 2 : Image finale minimaliste
-
-```dockerfile
-FROM python:3.9-slim
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
+# Dossier de travail
 WORKDIR /app
 
-# Récupération des paquets Python installés depuis l'étape précédente
-COPY --from=builder /root/.local /root/.local
-ENV PATH=/root/.local/bin:$PATH
+# Copier requirements en premier pour profiter du cache
+COPY requirements.txt .
 
-# Copie du code source Django
+# Installer les dépendances
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copier tout le reste du code
 COPY . .
 
-# Préparation des fichiers statiques + migrations
-RUN python manage.py collectstatic --no-input && \
-    python manage.py makemigrations && \
-    python manage.py migrate
+# Port exposé : 8080 (selon les besoins du client)
+EXPOSE 8080
 
-EXPOSE 5005
-
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
+# Lancement de l’app avec Gunicorn en mode production
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "run:app"]
 ```
 
 🔐 .dockerignore
