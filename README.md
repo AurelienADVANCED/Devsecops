@@ -350,46 +350,6 @@ spec:
 
 ## ⚙️ Déploiement de l'application Node.js (port 8080)
 
-**Fichier : `k8s/node-deployment.yaml`**
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: node-deployment
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: node
-  template:
-    metadata:
-      labels:
-        app: node
-    spec:
-      containers:
-        - name: node
-          image: node-app:1.0
-          ports:
-            - containerPort: 8080
-```
-
-Fichier : k8s/node-service.yaml
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: node-service
-spec:
-  type: NodePort
-  selector:
-    app: node
-  ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30080
-```
 
 ## ⚙️ Déploiement de l'application statique NGINX (port 9090)
 Fichier : k8s/nginx-deployment.yaml
