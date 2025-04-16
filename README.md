@@ -481,3 +481,19 @@ k apply -f k8s/flask-service.yml
 # Déployer l'Ingress
 k apply -f k8s/ingress.yml
 ```
+
+## ✅ Conclusion
+
+Ce projet nous a permis de mettre en place une maquette fonctionnelle d’un cluster Kubernetes local, capable d’héberger et de faire cohabiter trois applications web distinctes : Django (critique), Next.js, et Flask.
+
+Grâce à l’utilisation de fichiers `Dockerfile` adaptés, d’images optimisées et de manifests Kubernetes séparés pour chaque composant, nous avons pu respecter les exigences de modularité, de portabilité et de scalabilité imposées par le client.
+
+L’usage d’un Ingress unique a facilité l’accès aux services via une seule URL (`projet.local`), tout en respectant les règles de routage propres à chaque application. Le tout est documenté, versionné, et prêt à être migré dans un environnement de production cloud ou intégré à une pipeline CI/CD.
+
+🎯 **Compétences mobilisées** :
+- Docker & optimisation des images
+- Architecture Kubernetes (Minikube, Services, Ingress, etc.)
+- Gestion multi-applications et exposition centralisée
+- Automatisation du déploiement
+
+Le projet est prêt pour une démonstration, un audit technique, ou une future industrialisation.
