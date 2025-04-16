@@ -69,6 +69,8 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 ---
 ## 📁 Organisation du projet
 
+![ChatGPT Image 16 avr  2025, 14_53_25](https://github.com/user-attachments/assets/69b08dda-5059-4d19-9282-58a0b616e684)
+
 ![image](https://github.com/user-attachments/assets/87e260df-18c0-4d26-a4f1-fa5b158c9140)
 
 📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
