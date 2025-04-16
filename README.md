@@ -12,10 +12,9 @@
 4. [🔧 Étapes de réalisation](#-étapes-de-réalisation)  
 5. [🐳 Création des images Docker](#-création-des-images-docker)  
 6. [🚀 Optimisation des images Docker](#-optimisation-de-limage-docker-django)  
-7. [🌐 Ingress Kubernetes](#-ingress-kubernetes)  
-8. [📦 Déploiement des applications Kubernetes](#-déploiement-des-applications-kubernetes)  
-9. [🚀 Commandes de déploiement Kubernetes](#-commandes-de-déploiement-kubernetes)  
-10. [✅ Conclusion](#-conclusion)
+7. [📦 Déploiement des applications Kubernetes](#-déploiement-des-applications-kubernetes)  
+8. [🚀 Commandes de déploiement Kubernetes](#-commandes-de-déploiement-kubernetes)  
+9. [✅ Conclusion](#-conclusion)
 
 ---
 
@@ -41,9 +40,6 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 ```
            Navigateur / Client
                     │
-                    ▼
-            [ Ingress NGINX ]
-                    │
    ┌────────────────┼────────────────┐
    │                │                │
    ▼                ▼                ▼
@@ -56,18 +52,18 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 
 ### 🌐 Résumé des accès
 
-| Application | Port exposé | Type de service | Accès via Ingress             |
-|-------------|-------------|------------------|-------------------------------|
-| Django      | 80          | ClusterIP        | `http://localhost:port/django`  |
-| Next.js     | 9090        | ClusterIP         | `http://localhost:port/front`    |
-| Flask       | 8080        | ClusterIP     | `http://localhost:port/flask`   |
+| Application | Port exposé | Type de service | 
+|-------------|-------------|------------------|
+| Django      | 80          | ClusterIP        |
+| Next.js     | 9090        | ClusterIP         | 
+| Flask       | 8080        | ClusterIP     |
 ---
 ## 📁 Organisation du projet
 
 ![image](https://github.com/user-attachments/assets/88a9dbde-33ea-471f-a25e-3fc464af7108)
 
 📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
-📂 Tous les fichiers Kubernetes (`Deployment`, `Service`, `Ingress`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
+📂 Tous les fichiers Kubernetes (`Deployment`, `Service`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
 
 ---
 
@@ -77,7 +73,6 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 
 ```bash
 minikube start
-minikube addons enable ingress
 ```
 
 ## 🐳 Création des images Docker
@@ -302,48 +297,6 @@ Dockerfile
 docker build -t localhost/flask-app:latest .
 ```
 
-## 🌐 Ingress Kubernetes
-
-Le fichier suivant permet de définir un Ingress unique exposant les trois applications sur un seul domaine avec des chemins distincts pour chaque service.
-
-**Fichier : `k8s/ingress.yaml`**
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: app-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /django
-            pathType: Prefix
-            backend:
-              service:
-                name: django-service
-                port:
-                  number: 80
-          - path: /flask
-            pathType: Prefix
-            backend:
-              service:
-                name: flask-service
-                port:
-                  number: 8080
-          - path: /front
-            pathType: Prefix
-            backend:
-              service:
-                name: next-js-service
-                port:
-                  number: 9090
-```
-
-![image](https://github.com/user-attachments/assets/61c8cab3-5f11-4651-b1ee-567f81136825)
-
 # 📦 Déploiement des applications Kubernetes
 
 ## ⚙️ Déploiement de l'application Django (port 80)
@@ -477,9 +430,6 @@ spec:
 Voici les commandes à exécuter pour déployer tous les composants dans le cluster :
 
 ```bash
-# Déployer l'Ingress
-k apply -f k8s/ingress.yml
-
 # Déployer l'application Django
 k apply -f k8s/django-deployment.yml
 k apply -f k8s/django-service.yml
@@ -497,7 +447,6 @@ k apply -f k8s/flask-service.yml
 
 ### 🧩 Application 1 : Django
 
-#### 🔎 Affichage de l'interface web via Ingress
 ![image](https://github.com/user-attachments/assets/57576e4b-8513-43d7-9a08-117c79ead657)
 ![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
 
@@ -518,11 +467,9 @@ Ce projet nous a permis de mettre en place une maquette fonctionnelle d’un clu
 
 Grâce à l’utilisation de fichiers `Dockerfile` adaptés, d’images optimisées et de manifests Kubernetes séparés pour chaque composant, nous avons pu respecter les exigences de modularité, de portabilité et de scalabilité imposées par le client.
 
-L’usage d’un Ingress unique a facilité l’accès, tout en respectant les règles de routage propres à chaque application. Le tout est documenté, versionné, et prêt à être migré dans un environnement de production cloud ou intégré à une pipeline CI/CD.
-
 🎯 **Compétences mobilisées** :
 - Docker & optimisation des images
-- Architecture Kubernetes (Minikube, Services, Ingress, etc.)
+- Architecture Kubernetes (Minikube, Services, etc.)
 - Gestion multi-applications et exposition centralisée
 - Automatisation du déploiement
 
