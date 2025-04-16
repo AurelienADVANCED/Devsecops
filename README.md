@@ -48,12 +48,6 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 | Flask       | 9090        | LoadBalancer     | `http://projet.local/flask`   | `http://<minikube-ip>:9090` (via tunnel) |
 
 ---
-
-## 📁 Organisation du projet
-
-
-
----
 ## 📁 Organisation du projet
 ```
 projet-devsecops/
@@ -97,9 +91,9 @@ minikube tunnel
 
 ## 🐳 Création des images Docker
 
-### 📦 1. Application critique – Django (port 80)
+### 📦 1. Application critique – Django
 
-**Fichier : `django-app/Dockerfile`**
+**Fichier : django-volt/Dockerfile**
 
 ```dockerfile
 FROM python:3.11-slim
@@ -107,38 +101,45 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "app.wsgi"]
+EXPOSE 80
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "core.wsgi:application"]
 ```
 
 # Commande de build :
 ```
-docker build -t django-app:1.0 ./django-app
+docker build -t django-app:1.0 ./django-volt
 ```
-# 📦 2. Application Node.js (port 8080)
-## Fichier : node-app/Dockerfile
+# 📦 2. Application secondaire – Next.js
+## Fichier : hello-world-next-js/Dockerfile
 ```dockerfile
 FROM node:18-slim
 WORKDIR /app
 COPY . .
 RUN npm install
+RUN npm run build
 EXPOSE 8080
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
 ```
 ## Commande de build :
 ```
-docker build -t node-app:1.0 ./node-app
+docker build -t nextjs-app:1.0 ./hello-world-next-js
 ```
 
-# 📦 3. Application statique NGINX (port 9090)
-## Fichier : nginx-app/Dockerfile
+# 3. Application Flask
+## Fichier : flask-soft/Dockerfile
 ```dockerfile
-FROM nginx:alpine
-COPY ./index.html /usr/share/nginx/html/index.html
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 9090
+CMD ["gunicorn", "--bind", "0.0.0.0:9090", "app:app"]
 ```
 
 # Commande de build :
 ```
-docker build -t nginx-app:1.0 ./nginx-app
+docker build -t flask-app:1.0 ./flask-soft
 ```
 
 ## 🌐 Ingress Kubernetes
@@ -170,14 +171,14 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: node-service
+            name: nextjs-service
             port:
               number: 8080
-      - path: /nginx
+      - path: /flask
         pathType: Prefix
         backend:
           service:
-            name: nginx-service
+            name: flask-service
             port:
               number: 9090
 ```
