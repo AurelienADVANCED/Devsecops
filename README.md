@@ -13,7 +13,7 @@ Chaque composant doit être défini dans un manifeste séparé, et toutes les im
 ---
 
 ## 🏗️ Architecture cible
-
+```
        Internet
            ↓
     [Ingress NGINX]
@@ -21,7 +21,7 @@ Chaque composant doit être défini dans un manifeste séparé, et toutes les im
     ↓    ↓     ↓
  Django Node  Nginx
   (80)   (8080) (9090)
-
+```
 ---
 ```
 ## 📁 Organisation du projet
