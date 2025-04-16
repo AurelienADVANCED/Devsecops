@@ -20,7 +20,6 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 - ✅ **Next.js** – [hello-world-next-js](https://github.com/app-generator/hello-world-next-js)  
 - ✅ **Flask** – [flask-soft-1744678708](https://github.com/app-generator/flask-soft-1744678708)  
 
-
 ### 🔀 Schéma logique
 
 ```
