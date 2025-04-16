@@ -49,9 +49,8 @@ Les trois services sont également accessibles via un **Ingress** centralisé à
 | NGINX       | 9090        | LoadBalancer     | `http://projet.local/nginx`   | `http://<minikube-ip>:9090` (via tunnel) |
 
 ---
-```
 ## 📁 Organisation du projet
-
+```
 projet-devsecops/
 ├── django-app/                  # Application critique (port 80)
 │   ├── app/                     # Code Django
