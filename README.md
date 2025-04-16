@@ -33,7 +33,8 @@ Les trois services sont également accessibles via un **Ingress** centralisé à
    ┌────────────────┼────────────────┐
    │                │                │
    ▼                ▼                ▼
-  /django     /node (NodePort)     /nginx (LB) Django Node.js NGINX Port 80 Port 8080 Port 9090
+  /django     /node (NodePort)     /nginx (LB) Django Node.js NGINX
+  Port 80        Port 8080          Port 9090
 
 ```
 
