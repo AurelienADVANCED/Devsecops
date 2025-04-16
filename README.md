@@ -504,10 +504,12 @@ k apply -f k8s/flask-service.yml
 ### 🧩 Application 2 : Flask
 
 ![image](https://github.com/user-attachments/assets/f13d0ec4-9251-4f75-8c7d-147ca1d14817)
+![image](https://github.com/user-attachments/assets/f248fd82-a62c-4f6d-a775-cdb279b94887)
 
 ### 🧩 Application 3 : Next.js
 
 ![image](https://github.com/user-attachments/assets/1e16ef1b-b204-468a-ba55-c60bf3f36e4d)
+![image](https://github.com/user-attachments/assets/154ab717-26ab-4853-a6e5-24943d8e0a0c)
 
 ## ✅ Conclusion
 
