@@ -450,8 +450,8 @@ k apply -f k8s/django-deployment.yml
 k apply -f k8s/django-service.yml
 
 # Déployer l'application Next.js
-k apply -f k8s/nextjs-deployment.yml
-k apply -f k8s/nextjs-service.yml
+k apply -f k8s/next-js-deployment.yml
+k apply -f k8s/next-js-service.yml
 
 # Déployer l'application Flask
 k apply -f k8s/flask-deployment.yml
