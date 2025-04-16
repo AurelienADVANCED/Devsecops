@@ -69,7 +69,7 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 ---
 ## 📁 Organisation du projet
 
-![archi](https://github.com/user-attachments/assets/266eda7a-9e14-4350-8bdc-29a9cc8a0e25)
+![archi](https://github.com/user-attachments/assets/bfe1808c-635e-4e2f-ab4c-ad056e292bce)
 
 ![image](https://github.com/user-attachments/assets/87e260df-18c0-4d26-a4f1-fa5b158c9140)
 
