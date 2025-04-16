@@ -49,7 +49,7 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
    ▼                ▼                ▼
   /django        /node (NodePort)  /flask (LB)
   Django          Next.js            Flask
-   Port 80       Port 8080          Port 9090
+   Port 80       Port 9090          Port 8080
 
 ```
 
@@ -59,8 +59,8 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 | Application | Port exposé | Type de service | Accès via Ingress             | Accès direct             |
 |-------------|-------------|------------------|-------------------------------|---------------------------|
 | Django      | 80          | ClusterIP        | `http://projet.local/django`  | `http://<minikube-ip>:80`        |
-| Next.js     | 8080        | NodePort         | `http://projet.local/node`    | `http://<minikube-ip>:30080` |
-| Flask       | 9090        | LoadBalancer     | `http://projet.local/flask`   | `http://<minikube-ip>:9090` (via tunnel) |
+| Next.js     | 9090        | NodePort         | `http://projet.local/node`    | `http://<minikube-ip>:30080` |
+| Flask       | 8080        | LoadBalancer     | `http://projet.local/flask`   | `http://<minikube-ip>:8080` (via tunnel) |
 
 ---
 ## 📁 Organisation du projet
