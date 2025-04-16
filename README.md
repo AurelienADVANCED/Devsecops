@@ -13,15 +13,39 @@ Chaque composant doit être défini dans un manifeste séparé, et toutes les im
 ---
 
 ## 🏗️ Architecture cible
+
+L’architecture mise en place repose sur un cluster Kubernetes local (via Minikube), hébergeant trois applications distinctes :
+
+- Une application critique Django exposée sur le port **80**
+- Une application Node.js exposée sur le port **8080** (via NodePort)
+- Une application statique NGINX exposée sur le port **9090** (via LoadBalancer)
+
+Les trois services sont également accessibles via un **Ingress** centralisé à l’URL `http://projet.local`.
+
+### 🔀 Schéma logique
+
 ```
-       Internet
-           ↓
-    [Ingress NGINX]
-    ┌────┬─────┬
-    ↓    ↓     ↓
- Django Node  Nginx
-  (80)   (8080) (9090)
+             Navigateur / Client
+                     │
+                     ▼
+              [ Ingress NGINX ]
+                     │
+   ┌────────────────┼────────────────┐
+   │                │                │
+   ▼                ▼                ▼
+  /django     /node (NodePort)     /nginx (LB) Django Node.js NGINX Port 80 Port 8080 Port 9090
+
 ```
+
+
+### 🌐 Résumé des accès
+
+| Application | Port exposé | Type de service | Accès via Ingress             | Accès direct             |
+|-------------|-------------|------------------|-------------------------------|---------------------------|
+| Django      | 80          | ClusterIP        | `http://projet.local/django`  | Interne uniquement        |
+| Node.js     | 8080        | NodePort         | `http://projet.local/node`    | `http://<minikube-ip>:30080` |
+| NGINX       | 9090        | LoadBalancer     | `http://projet.local/nginx`   | `http://<minikube-ip>:9090` (via tunnel) |
+
 ---
 ```
 ## 📁 Organisation du projet
@@ -150,3 +174,93 @@ spec:
             port:
               number: 9090
 ```
+
+💡 Il faut pas oublier d’ajouter la ligne suivante dans ton fichier /etc/hosts :
+```
+127.0.0.1 projet.local
+```
+
+## 📦 Déploiement des applications Kubernetes
+
+### ⚙️ Déploiement de l'application Node.js (port 8080)
+
+**Fichier : `k8s/node-deployment.yaml`**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+        - name: node
+          image: node-app:1.0
+          ports:
+            - containerPort: 8080
+```
+
+# Fichier : k8s/node-service.yaml
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-service
+spec:
+  type: NodePort
+  selector:
+    app: node
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30080
+```
+
+⚙️ Déploiement de l'application statique NGINX (port 9090)
+# Fichier : k8s/nginx-deployment.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx-app:1.0
+          ports:
+            - containerPort: 9090
+```
+Fichier : k8s/nginx-service.yaml
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+    - port: 9090
+      targetPort: 9090
+```
+
