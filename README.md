@@ -342,7 +342,7 @@ Dockerfile
 
 ## 🌐 Ingress Kubernetes
 
-Le fichier suivant permet de définir un Ingress unique exposant les trois applications sur un seul domaine (`projet.local`) avec des chemins distincts pour chaque service.
+Le fichier suivant permet de définir un Ingress unique exposant les trois applications sur un seul domaine avec des chemins distincts pour chaque service.
 
 **Fichier : `k8s/ingress.yaml`**
 
