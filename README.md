@@ -57,9 +57,9 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 
 | Application | Port exposé | Type de service | Accès via Ingress             |
 |-------------|-------------|------------------|-------------------------------|
-| Django      | 80          | LoadBalancer        | `http://projet.local/django`  |
-| Next.js     | 9090        | LoadBalancer         | `http://projet.local/front`    |
-| Flask       | 8080        | LoadBalancer     | `http://projet.local/flask`   |
+| Django      | 80          | LoadBalancer        | `http://localhost/`  |
+| Next.js     | 9090        | LoadBalancer         | `http://localhost/front`    |
+| Flask       | 8080        | LoadBalancer     | `http://localhost/flask`   |
 ---
 ## 📁 Organisation du projet
 
