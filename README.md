@@ -162,7 +162,7 @@ CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
 ```dockerfile
-FROM node:18-slim
+FROM node:18-alpine
 WORKDIR /app
 COPY . .
 RUN npm install
