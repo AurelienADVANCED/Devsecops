@@ -420,6 +420,7 @@ k apply -f k8s/flask-service.yml
 ![image](https://github.com/user-attachments/assets/f13d0ec4-9251-4f75-8c7d-147ca1d14817)
 
 🧩 Application 3 : Next.js
+
 ![image](https://github.com/user-attachments/assets/1e16ef1b-b204-468a-ba55-c60bf3f36e4d)
 
 ## ✅ Conclusion
