@@ -348,9 +348,6 @@ spec:
 
 # 📦 Déploiement des applications Kubernetes
 
-## ⚙️ Déploiement de l'application Node.js (port 8080)
-
-
 ## ⚙️ Déploiement de l'application statique NGINX (port 9090)
 Fichier : k8s/nginx-deployment.yaml
 ```yaml
@@ -412,7 +409,6 @@ k apply -f k8s/next-js-service.yml
 k apply -f k8s/flask-deployment.yml
 k apply -f k8s/flask-service.yml
 ```
-
 
 ![image](https://github.com/user-attachments/assets/f13d0ec4-9251-4f75-8c7d-147ca1d14817)
 ![image](https://github.com/user-attachments/assets/57576e4b-8513-43d7-9a08-117c79ead657)
