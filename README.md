@@ -175,6 +175,18 @@ CMD ["npm", "start"]
 docker build -t nextjs-app:1.0 ./hello-world-next-js
 ```
 
+🔐 .dockerignore
+```dockerfile
+node_modules/
+.next/
+.env
+*.log
+.git/
+.gitignore
+Dockerfile
+docker-compose.yml
+```
+
 # 3. Application Flask
 ## Fichier : flask-soft/Dockerfile
 ```dockerfile
@@ -192,7 +204,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:9090", "app:app"]
 docker build -t flask-app:1.0 ./flask-soft
 ```
 
-🔐 .dockerignore pour flask-soft/ (Flask)
+🔐 .dockerignore
 ```dockerfile
 __pycache__/
 *.py[cod]
