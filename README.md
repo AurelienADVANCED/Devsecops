@@ -56,9 +56,9 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 
 | Application | Port Kubernetes | Port local | Commande port-forward                              |
 |-------------|------------------|--------------------------|-----------------------------------------------------|
-| Django      | 5005             | 80                       | `kubectl port-forward svc/django-service 80:80`     |
-| Flask       | 8080             | 8080                     | `kubectl port-forward svc/flask-service 8080:8080`  |
-| Next.js     | 9090             | 9090                     | `kubectl port-forward svc/next-js-service 9090:9090`|
+| Django      | 5005             | 80                       | `k port-forward svc/django-service 8081:80`     |
+| Flask       | 8080             | 8080                     | `k port-forward svc/flask-service 8080:8080`  |
+| Next.js     | 9090             | 9090                     | `k port-forward svc/next-js-service 9090:9090`|
 
 💡 Ces redirections permettent d'accéder directement à :
 
