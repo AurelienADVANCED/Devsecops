@@ -7,7 +7,7 @@
 ## 📚 Sommaire
 
 1. [🎯 Objectif du projet](#-objectif-du-projet)  
-2. [🏗️ Architecture cible](#-architecture-cible)  
+2. [🏗️ Architecture cible](#architecture-cible)
 3. [📁 Organisation du projet](#-organisation-du-projet)  
 4. [🔧 Étapes de réalisation](#-étapes-de-réalisation)  
 5. [🐳 Création des images Docker](#-création-des-images-docker)  
@@ -27,6 +27,7 @@ Toutes les images Docker doivent être construites manuellement, optimisées, et
 
 ---
 
+<a name="architecture-cible"></a>
 ## 🏗️ Architecture cible
 
 L’architecture repose sur un cluster Kubernetes local (via Minikube), hébergeant trois applications clonées et adaptées à partir de dépôts publics :
