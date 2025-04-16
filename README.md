@@ -457,17 +457,17 @@ k apply -f k8s/flask-service.yml
 
 ### 🧩 Application 1 : Django
 
-![image](https://github.com/user-attachments/assets/57576e4b-8513-43d7-9a08-117c79ead657)
+![image](https://github.com/user-attachments/assets/fd3abe96-87fb-4529-ba40-20081ad7a758)
 ![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
 
 ### 🧩 Application 2 : Flask
 
-![image](https://github.com/user-attachments/assets/f13d0ec4-9251-4f75-8c7d-147ca1d14817)
+![image](https://github.com/user-attachments/assets/e29c91cc-97ce-4a4a-813f-c5fff5e569fc)
 ![image](https://github.com/user-attachments/assets/f248fd82-a62c-4f6d-a775-cdb279b94887)
 
 ### 🧩 Application 3 : Next.js
 
-![image](https://github.com/user-attachments/assets/1e16ef1b-b204-468a-ba55-c60bf3f36e4d)
+![image](https://github.com/user-attachments/assets/947013fc-284b-4a97-a2b9-fae5ad34f8cb)
 
 ![image](https://github.com/user-attachments/assets/154ab717-26ab-4853-a6e5-24943d8e0a0c)
 
