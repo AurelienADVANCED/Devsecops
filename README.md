@@ -123,7 +123,7 @@ docker build -t localhost/django-app:latest .
 minikube image load localhost/django-app:latest
 ```
 
-![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
+
 
 ## 🚀 Optimisation de l'image Docker Django
 
@@ -211,7 +211,6 @@ static/
 Dockerfile
 .dockerignore
 ```
-![image](https://github.com/user-attachments/assets/57576e4b-8513-43d7-9a08-117c79ead657)
 
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
@@ -265,7 +264,6 @@ Dockerfile
 .gitignore
 .vscode
 ```
-![image](https://github.com/user-attachments/assets/1e16ef1b-b204-468a-ba55-c60bf3f36e4d)
 
 # 3. Application Flask
 ## Fichier : flask-soft/Dockerfile
@@ -357,7 +355,7 @@ Dockerfile
 .dockerignore
 ```
 
-![image](https://github.com/user-attachments/assets/f13d0ec4-9251-4f75-8c7d-147ca1d14817)
+
 
 ## 🌐 Ingress Kubernetes
 
@@ -507,6 +505,12 @@ k apply -f k8s/next-js-service.yml
 k apply -f k8s/flask-deployment.yml
 k apply -f k8s/flask-service.yml
 ```
+
+
+![image](https://github.com/user-attachments/assets/f13d0ec4-9251-4f75-8c7d-147ca1d14817)
+![image](https://github.com/user-attachments/assets/57576e4b-8513-43d7-9a08-117c79ead657)
+![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
+![image](https://github.com/user-attachments/assets/1e16ef1b-b204-468a-ba55-c60bf3f36e4d)
 
 ## ✅ Conclusion
 
