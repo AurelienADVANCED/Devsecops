@@ -66,7 +66,7 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 - `http://localhost:8080` → Flask  
 - `http://localhost:9090` → Next.js  
 
-> 🧠 Conseil : fais ces commandes dans **3 terminaux séparés**.
+> 🧠 Faire ces commandes dans **3 terminaux séparés**.
 ---
 ## 📁 Organisation du projet
 
