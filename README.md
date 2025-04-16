@@ -77,6 +77,9 @@ projet-devsecops/
 ├── README.md                    # Instructions du projet
 └── .gitignore                   # Fichiers à exclure du repo
 ```
+📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
+📂 Tous les fichiers Kubernetes (`Deployment`, `Service`, `Ingress`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
+
 ---
 
 ## 🔧 Étapes de réalisation
