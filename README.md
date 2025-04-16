@@ -64,3 +64,36 @@ minikube start
 minikube addons enable ingress
 minikube tunnel
 ```
+
+## 🐳 Création des images Docker
+
+### 📦 1. Application critique – Django (port 80)
+
+**Fichier : `django-app/Dockerfile`**
+
+```dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app.wsgi"]
+```
+
+# Commande de build :
+docker build -t django-app:1.0 ./django-app
+
+# 📦 2. Application Node.js (port 8080)
+## Fichier : node-app/Dockerfile
+```dockerfile
+FROM node:18-slim
+WORKDIR /app
+COPY . .
+RUN npm install
+EXPOSE 8080
+CMD ["node", "server.js"]
+```
+## Commande de build :
+```
+docker build -t node-app:1.0 ./node-app
+```
