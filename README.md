@@ -52,33 +52,11 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 ```
 projet-devsecops/
 ├── django-app/                  # Application critique (port 80)
-│   ├── app/                     # Code Django
-│   ├── requirements.txt         # Dépendances Python
-│   ├── Dockerfile               # Image Docker de l'app
-│   └── .env                     # Variables d'environnement (non versionnées)
-│
-├── node-app/                    # Application secondaire (port 8080)
-│   ├── server.js                # Serveur Node.js simple
-│   └── Dockerfile               # Image Docker
-│
-├── nginx-app/                   # Troisième application (port 9090)
-│   ├── index.html               # Page HTML statique
-│   └── Dockerfile               # Image Docker avec nginx
-│
-├── k8s/                         # Manifeste Kubernetes
-│   ├── django-deployment.yaml
-│   ├── django-service.yaml
-│   ├── node-deployment.yaml
-│   ├── node-service.yaml
-│   ├── nginx-deployment.yaml
-│   ├── nginx-service.yaml
-│   └── ingress.yaml             # Exposition via Ingress
-│
-├── README.md                    # Instructions du projet
-└── .gitignore                   # Fichiers à exclure du repo
+
 ```
 📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
 📂 Tous les fichiers Kubernetes (`Deployment`, `Service`, `Ingress`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
+![image](https://github.com/user-attachments/assets/ad49e85a-c5c3-4faf-b0fc-551f8aba1e36)
 
 ---
 
