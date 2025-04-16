@@ -113,11 +113,6 @@ EXPOSE 5005
 CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 ```
 
-# Commande de build :
-```
-docker build -t localhost/django-app:latest .
-```
-
 ## 🚀 Optimisation de l'image Docker Django
 
 Afin de produire une image **plus légère, plus rapide à déployer et plus sécurisée**, l’image Docker de l’application Django a été optimisée à l’aide d’un **build multi-étapes**.
@@ -203,6 +198,11 @@ static/
 # Docker
 Dockerfile
 .dockerignore
+```
+
+# Commande de build :
+```
+docker build -t localhost/django-app:latest .
 ```
 
 # 📦 2. Application secondaire – Next.js
