@@ -23,7 +23,7 @@ Chaque composant doit être défini dans un manifeste séparé, et toutes les im
   (80)   (8080) (9090)
 
 ---
-
+```
 ## 📁 Organisation du projet
 
 projet-devsecops/
@@ -52,7 +52,7 @@ projet-devsecops/
 │
 ├── README.md                    # Instructions du projet
 └── .gitignore                   # Fichiers à exclure du repo
-
+```
 ---
 
 ## 🔧 Étapes de réalisation
