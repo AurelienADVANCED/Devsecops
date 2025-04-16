@@ -43,9 +43,8 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
    ┌────────────────┼────────────────┐
    │                │                │
    ▼                ▼                ▼
-  /django        /front            /flask
   Django          Next.js           Flask
-   Port 80       Port 9090         Port 8080
+ Port 8081       Port 9090         Port 8080
 
 ```
 
