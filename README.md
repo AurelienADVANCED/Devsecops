@@ -1,6 +1,7 @@
 # Projet E5 DevSecOps – ESTIAM Metz  
 ## Groupe WMD – Rapport de réalisation  
 **Nom : Aurelien ROSELLO**  
+**Binôme : Aurian BOHN**  
 **Date : 16 avril 2025**
 
 ---
