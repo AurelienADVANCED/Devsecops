@@ -43,7 +43,7 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 
 | Application | Port exposé | Type de service | Accès via Ingress             | Accès direct             |
 |-------------|-------------|------------------|-------------------------------|---------------------------|
-| Django      | 80          | ClusterIP        | `http://projet.local/django`  | Interne uniquement        |
+| Django      | 80          | ClusterIP        | `http://projet.local/django`  | `http://<minikube-ip>:80`        |
 | Next.js     | 8080        | NodePort         | `http://projet.local/node`    | `http://<minikube-ip>:30080` |
 | Flask       | 9090        | LoadBalancer     | `http://projet.local/flask`   | `http://<minikube-ip>:9090` (via tunnel) |
 
