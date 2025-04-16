@@ -346,7 +346,48 @@ spec:
 
 # 📦 Déploiement des applications Kubernetes
 
-## ⚙️ Déploiement de l'application statique Next.js (port 9090)
+## ⚙️ Déploiement de l'application Django (port 80)
+Fichier : k8s/django-deployment.yml
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-app
+  template:
+    metadata:
+      labels:
+        app: django-app
+    spec:
+      containers:
+        - name: django
+          image: localhost/django-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5005
+```
+
+Fichier : k8s/django-service.yml
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-service
+spec:
+  selector:
+    app: django-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5005
+  type: ClusterIP
+```
+
+## ⚙️ Déploiement de l'application Next.js (port 9090)
 Fichier : k8s/next-js-deployment.yaml
 ```yaml
 apiVersion: apps/v1
@@ -384,6 +425,50 @@ spec:
     - protocol: TCP
       port: 9090
       targetPort: 9090
+  type: ClusterIP
+```
+
+## ⚙️ Déploiement de l'application Flask (port 8080)
+
+Fichier : k8s/flask-deployment.yml
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask
+          image: localhost/flask-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+```
+
+Fichier : k8s/flask-service.yml
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  selector:
+    app: flask-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
   type: ClusterIP
 ```
 
@@ -429,7 +514,7 @@ Ce projet nous a permis de mettre en place une maquette fonctionnelle d’un clu
 
 Grâce à l’utilisation de fichiers `Dockerfile` adaptés, d’images optimisées et de manifests Kubernetes séparés pour chaque composant, nous avons pu respecter les exigences de modularité, de portabilité et de scalabilité imposées par le client.
 
-L’usage d’un Ingress unique a facilité l’accès aux services via une seule URL (`projet.local`), tout en respectant les règles de routage propres à chaque application. Le tout est documenté, versionné, et prêt à être migré dans un environnement de production cloud ou intégré à une pipeline CI/CD.
+L’usage d’un Ingress unique a facilité l’accès, tout en respectant les règles de routage propres à chaque application. Le tout est documenté, versionné, et prêt à être migré dans un environnement de production cloud ou intégré à une pipeline CI/CD.
 
 🎯 **Compétences mobilisées** :
 - Docker & optimisation des images
