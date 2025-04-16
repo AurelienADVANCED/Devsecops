@@ -238,14 +238,14 @@ minikube image load localhost/next-js-app:latest
 
 🔐 .dockerignore
 ```dockerfile
-node_modules/
-.next/
-.env
-*.log
-.git/
-.gitignore
+node_modules
+npm-debug.log
+.next
 Dockerfile
-docker-compose.yml
+.dockerignore
+.git
+.gitignore
+.vscode
 ```
 
 # 3. Application Flask
