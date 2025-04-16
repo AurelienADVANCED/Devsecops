@@ -371,6 +371,13 @@ spec:
                 name: flask-service
                 port:
                   number: 8080
+          - path: /front
+            pathType: Prefix
+            backend:
+              service:
+                name: next-js-service
+                port:
+                  number: 9090
 ```
 
 ![image](https://github.com/user-attachments/assets/61c8cab3-5f11-4651-b1ee-567f81136825)
