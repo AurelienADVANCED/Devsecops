@@ -129,6 +129,9 @@ CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 ```
 docker build -t django-app:latest .
 ```
+
+![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
+
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
 ```dockerfile
