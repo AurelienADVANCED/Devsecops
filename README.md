@@ -127,7 +127,7 @@ CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 
 # Commande de build :
 ```
-docker build -t django-app:1.0 ./django-volt
+docker build -t django-app:latest .
 ```
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
