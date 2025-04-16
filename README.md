@@ -159,6 +159,41 @@ EXPOSE 5005
 CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 ```
 
+🔐 .dockerignore
+```dockerfile
+# Répertoires de dev
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.env
+*.db
+*.bak
+*.swp
+
+# Répertoires spécifiques
+.env/
+venv/
+env/
+.idea/
+.vscode/
+.mypy_cache/
+.coverage
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Fichiers générés par collectstatic
+staticfiles/
+static/
+
+# Docker
+Dockerfile
+.dockerignore
+```
+
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
 ```dockerfile
