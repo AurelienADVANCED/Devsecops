@@ -65,7 +65,7 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 ---
 ## 📁 Organisation du projet
 
-![image](https://github.com/user-attachments/assets/47765e81-565c-485c-b5c5-fa95039b50af)
+![image](https://github.com/user-attachments/assets/88a9dbde-33ea-471f-a25e-3fc464af7108)
 
 📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
 📂 Tous les fichiers Kubernetes (`Deployment`, `Service`, `Ingress`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
@@ -267,6 +267,7 @@ Dockerfile
 .gitignore
 .vscode
 ```
+![image](https://github.com/user-attachments/assets/1e16ef1b-b204-468a-ba55-c60bf3f36e4d)
 
 # 3. Application Flask
 ## Fichier : flask-soft/Dockerfile
