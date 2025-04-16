@@ -50,7 +50,7 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 ---
 ## 📁 Organisation du projet
 
-![image](https://github.com/user-attachments/assets/ad49e85a-c5c3-4faf-b0fc-551f8aba1e36)
+![image](https://github.com/user-attachments/assets/47765e81-565c-485c-b5c5-fa95039b50af)
 
 📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
 📂 Tous les fichiers Kubernetes (`Deployment`, `Service`, `Ingress`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
