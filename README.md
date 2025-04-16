@@ -384,3 +384,27 @@ spec:
       targetPort: 9090
 ```
 
+## 🚀 Commandes de déploiement Kubernetes
+
+Voici les commandes à exécuter pour déployer tous les composants dans ton cluster :
+
+```bash
+# Appliquer la ConfigMap si présente
+k apply -f k8s/configmap.yml
+
+# Déployer l'application Django
+k apply -f k8s/django-deployment.yml
+k apply -f k8s/django-service.yml
+
+# Déployer l'application Next.js
+k apply -f k8s/nextjs-deployment.yml
+k apply -f k8s/nextjs-service.yml
+
+# Déployer l'application Flask
+k apply -f k8s/flask-deployment.yml
+k apply -f k8s/flask-service.yml
+
+# Déployer l'Ingress
+k apply -f k8s/ingress.yml
+```
+
