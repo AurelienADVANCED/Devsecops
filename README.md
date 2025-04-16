@@ -178,7 +178,7 @@ docker build -t nextjs-app:1.0 ./hello-world-next-js
 # 3. Application Flask
 ## Fichier : flask-soft/Dockerfile
 ```dockerfile
-FROM python:3.11-slim
+FROM python:3.11-alpine
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
