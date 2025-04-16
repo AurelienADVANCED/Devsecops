@@ -44,7 +44,7 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
    │                │                │
    ▼                ▼                ▼
   Django          Next.js           Flask
- Port 8081       Port 9090         Port 8080
+ Port 80       Port 9090         Port 8080
 
 ```
 
@@ -55,7 +55,7 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 
 | Application | Port Kubernetes | Port local | Commande port-forward                              |
 |-------------|------------------|--------------------------|-----------------------------------------------------|
-| Django      | 5005             | 8081                       | `k port-forward svc/django-service 8081:80`     |
+| Django      | 5005             | 80                       | `k port-forward svc/django-service 80:80`     |
 | Flask       | 8080             | 8080                     | `k port-forward svc/flask-service 8080:8080`  |
 | Next.js     | 9090             | 9090                     | `k port-forward svc/next-js-service 9090:9090`|
 
@@ -256,7 +256,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copier tout le reste du code
 COPY . .
 
-# Port exposé : 8080 (selon les besoins du client)
+# Port exposé : 8080 
 EXPOSE 8080
 
 # Lancement de l’app avec Gunicorn en mode production
