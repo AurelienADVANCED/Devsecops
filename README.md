@@ -13,9 +13,10 @@
 5. [🐳 Création des images Docker](#-création-des-images-docker)  
 6. [🚀 Optimisation des images Docker](#-optimisation-de-limage-docker-django)  
 7. [📦 Déploiement des applications Kubernetes](#-déploiement-des-applications-kubernetes)  
-8. [🚀 Commandes de déploiement Kubernetes](#-commandes-de-déploiement-kubernetes)
-9. [ℹ️ Concepts DevSecOps & Kubernetes](#️-concepts-devsecops--kubernetes)  
-10. [✅ Conclusion](#-conclusion)
+8. [🌐 Ingress Kubernetes](#-ingress-kubernetes)  
+9. [🚀 Commandes de déploiement Kubernetes](#-commandes-de-déploiement-kubernetes)
+10. [ℹ️ Concepts DevSecOps & Kubernetes](#️-concepts-devsecops--kubernetes)  
+11. [✅ Conclusion](#-conclusion)
 
 ---
 
