@@ -118,13 +118,6 @@ CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 docker build -t localhost/django-app:latest .
 ```
 
-# Charger l'image dans Minikube :
-```
-minikube image load localhost/django-app:latest
-```
-
-
-
 ## 🚀 Optimisation de l'image Docker Django
 
 Afin de produire une image **plus légère, plus rapide à déployer et plus sécurisée**, l’image Docker de l’application Django a été optimisée à l’aide d’un **build multi-étapes**.
@@ -248,11 +241,6 @@ CMD ["npx", "next", "start", "-p", "9090"]
 docker build -t localhost/next-js-app:latest .
 ```
 
-## Charger l’image dans Minikube :
-```
-minikube image load localhost/next-js-app:latest
-```
-
 🔐 .dockerignore
 ```dockerfile
 node_modules
@@ -310,11 +298,6 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8080", "run:app"]
 # Commande de build :
 ```
 docker build -t localhost/flask-app:latest .
-```
-
-# Charger l'image dans Minikube :
-```
-minikube image load localhost/flask-app:latest
 ```
 
 🔐 .dockerignore
