@@ -107,6 +107,58 @@ docker build -t django-app:latest .
 
 ![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
 
+## 🚀 Optimisation de l'image Docker Django
+
+Afin de produire une image **plus légère, plus rapide à déployer et plus sécurisée**, l’image Docker de l’application Django a été optimisée à l’aide d’un **build multi-étapes**.
+
+### 🧱 Étape 1 : Build intermédiaire avec compilation
+
+```dockerfile
+FROM python:3.9-slim AS builder
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+COPY requirements.txt .
+
+# Installation des outils de compilation + dépendances
+RUN apt-get update \
+  && apt-get install -y build-essential gcc \
+  && pip install --upgrade pip \
+  && pip install --user --no-warn-script-location --no-cache-dir -r requirements.txt \
+  && apt-get remove -y build-essential gcc \
+  && apt-get autoremove -y \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+```
+### 📦 Étape 2 : Image finale minimaliste
+
+```dockerfile
+FROM python:3.9-slim
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+# Récupération des paquets Python installés depuis l'étape précédente
+COPY --from=builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
+
+# Copie du code source Django
+COPY . .
+
+# Préparation des fichiers statiques + migrations
+RUN python manage.py collectstatic --no-input && \
+    python manage.py makemigrations && \
+    python manage.py migrate
+
+EXPOSE 5005
+
+CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
+```
+
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
 ```dockerfile
