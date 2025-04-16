@@ -69,7 +69,6 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 ---
 ## 📁 Organisation du projet
 
-![ChatGPT Image 16 avr  2025, 14_53_25](https://github.com/user-attachments/assets/69b08dda-5059-4d19-9282-58a0b616e684)
 ![archi](https://github.com/user-attachments/assets/266eda7a-9e14-4350-8bdc-29a9cc8a0e25)
 
 ![image](https://github.com/user-attachments/assets/87e260df-18c0-4d26-a4f1-fa5b158c9140)
