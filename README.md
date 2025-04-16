@@ -213,6 +213,8 @@ static/
 Dockerfile
 .dockerignore
 ```
+![image](https://github.com/user-attachments/assets/57576e4b-8513-43d7-9a08-117c79ead657)
+![image](https://github.com/user-attachments/assets/61c8cab3-5f11-4651-b1ee-567f81136825)
 
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
@@ -227,7 +229,12 @@ CMD ["npm", "start"]
 ```
 ## Commande de build :
 ```
-docker build -t nextjs-app:1.0 ./hello-world-next-js
+docker build -t localhost/nextjs-app:1.0 .
+```
+
+## Charger l’image dans Minikube :
+```
+docker build -t localhost/nextjs-app:1.0 .
 ```
 
 🔐 .dockerignore
