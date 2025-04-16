@@ -14,13 +14,12 @@ Chaque composant doit être défini dans un manifeste séparé, et toutes les im
 
 ## 🏗️ Architecture cible
 
-L’architecture mise en place repose sur un cluster Kubernetes local (via Minikube), hébergeant trois applications distinctes :
+L’architecture repose sur un cluster Kubernetes local (via Minikube), hébergeant trois applications clonées et adaptées à partir de dépôts publics :
 
-- Une application critique Django exposée sur le port **80**
-- Une application Node.js exposée sur le port **8080** (via NodePort)
-- Une application statique NGINX exposée sur le port **9090** (via LoadBalancer)
+- ✅ **Django Volt** – [django-volt-1744777679](https://github.com/app-generator/django-volt-1744777679)  
+- ✅ **Next.js** – [hello-world-next-js](https://github.com/app-generator/hello-world-next-js)  
+- ✅ **Flask** – [flask-soft-1744678708](https://github.com/app-generator/flask-soft-1744678708)  
 
-Les trois services sont également accessibles via un **Ingress** centralisé à l’URL `http://projet.local`.
 
 ### 🔀 Schéma logique
 
