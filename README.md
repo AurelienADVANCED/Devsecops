@@ -8,8 +8,9 @@
 
 ## 🎯 Objectif du projet
 
-L’objectif est de créer une maquette de cluster Kubernetes capable d’héberger trois applications, dont une critique développée en Django, chacune accessible via un port différent (80, 8080, 9090).  
-Chaque composant doit être défini dans un manifeste séparé, et toutes les images Docker doivent être créées et hébergées dans un dépôt Git.
+L'objectif de ce projet est de concevoir une maquette fonctionnelle d’un cluster Kubernetes local capable d’héberger trois applications web distinctes, dont une application critique développée en Django.  
+Chaque application doit être exposée sur un port spécifique (80, 8080 et 9090) et déployée à l’aide de fichiers manifeste Kubernetes indépendants.  
+Toutes les images Docker doivent être construites manuellement, optimisées, et intégrées dans un dépôt Git afin d’assurer la traçabilité et la portabilité de l’environnement.
 
 ---
 
