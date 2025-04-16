@@ -199,10 +199,6 @@ EXPOSE 9090
 
 CMD ["npx", "next", "start", "-p", "9090"]
 ```
-## Commande de build :
-```
-docker build -t localhost/next-js-app:latest .
-```
 
 🔐 .dockerignore
 ```dockerfile
@@ -214,6 +210,11 @@ Dockerfile
 .git
 .gitignore
 .vscode
+```
+
+## Commande de build :
+```
+docker build -t localhost/next-js-app:latest .
 ```
 
 # 3. Application Flask
@@ -258,11 +259,6 @@ EXPOSE 8080
 CMD ["gunicorn", "--bind", "0.0.0.0:8080", "run:app"]
 ```
 
-# Commande de build :
-```
-docker build -t localhost/flask-app:latest .
-```
-
 🔐 .dockerignore
 ```dockerfile
  docker
@@ -299,6 +295,11 @@ static/
 # Docker
 Dockerfile
 .dockerignore
+```
+
+# Commande de build :
+```
+docker build -t localhost/flask-app:latest .
 ```
 
 
