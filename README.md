@@ -464,6 +464,9 @@ spec:
 Voici les commandes à exécuter pour déployer tous les composants dans le cluster :
 
 ```bash
+# Déployer l'Ingress
+k apply -f k8s/ingress.yml
+
 # Déployer l'application Django
 k apply -f k8s/django-deployment.yml
 k apply -f k8s/django-service.yml
@@ -475,9 +478,6 @@ k apply -f k8s/next-js-service.yml
 # Déployer l'application Flask
 k apply -f k8s/flask-deployment.yml
 k apply -f k8s/flask-service.yml
-
-# Déployer l'Ingress
-k apply -f k8s/ingress.yml
 ```
 
 ## ✅ Conclusion
