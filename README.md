@@ -41,11 +41,15 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 ```
            Navigateur / Client
                     │
+                    ▼
+            [ Ingress NGINX ]
+                    │
    ┌────────────────┼────────────────┐
    │                │                │
    ▼                ▼                ▼
+  /django        /front            /flask
   Django          Next.js           Flask
- Port 80       Port 9090         Port 8080
+   Port 80       Port 9090         Port 8080
 
 ```
 
@@ -54,11 +58,11 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 
 Chaque application est exposée en local sur les ports spécifiés dans la consigne :
 
-| Application | Port Kubernetes | Port local | Commande port-forward                              |
-|-------------|------------------|--------------------------|-----------------------------------------------------|
-| Django      | 5005             | 80                       | `k port-forward svc/django-service 80:80`     |
-| Flask       | 8080             | 8080                     | `k port-forward svc/flask-service 8080:8080`  |
-| Next.js     | 9090             | 9090                     | `k port-forward svc/next-js-service 9090:9090`|
+| Application | Port exposé | Type de service | Accès via Ingress             |
+|-------------|-------------|------------------|-------------------------------|
+| Django      | 80          | ClusterIP        | `http://localhost/django`  |
+| Next.js     | 9090        | ClusterIP         | `http://localhost/front`    |
+| Flask       | 8080        | ClusterIP     | `http://localhost/flask`   |
 
 💡 Ces redirections permettent d'accéder directement à :
 
@@ -85,6 +89,7 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 
 ```bash
 minikube start
+minikube addons enable ingress
 ```
 
 ## 🐳 Création des images Docker
@@ -309,6 +314,49 @@ Dockerfile
 docker build -t localhost/flask-app:latest .
 ```
 
+
+## 🌐 Ingress Kubernetes
+
+Le fichier suivant permet de définir un Ingress unique exposant les trois applications sur un seul domaine avec des chemins distincts pour chaque service.
+
+**Fichier : `k8s/ingress.yaml`**
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /django
+            pathType: Prefix
+            backend:
+              service:
+                name: django-service
+                port:
+                  number: 80
+          - path: /flask
+            pathType: Prefix
+            backend:
+              service:
+                name: flask-service
+                port:
+                  number: 8080
+          - path: /front
+            pathType: Prefix
+            backend:
+              service:
+                name: next-js-service
+                port:
+                  number: 9090
+```
+
+![image](https://github.com/user-attachments/assets/61c8cab3-5f11-4651-b1ee-567f81136825)
+
 # 📦 Déploiement des applications Kubernetes
 
 ## ⚙️ Déploiement de l'application Django (port 80)
@@ -336,6 +384,50 @@ spec:
             - containerPort: 5005
 ```
 
+🧱 Détail du fichier k8s/django-deployment.yml
+```
+kind: Deployment
+```
+🎯 Définit le type de ressource Kubernetes que tu crées ici.
+Deployment sert à déployer, maintenir et mettre à jour des groupes de Pods.
+
+
+```
+spec:
+  replicas: 1
+```
+🔁 Le champ replicas indique le nombre de pods à exécuter.
+Ici, 1 pod sera déployé pour l'application Django.
+
+```
+  selector:
+    matchLabels:
+      app: django-app
+```
+🔎 Ce sélecteur permet au déploiement de trouver les pods à gérer.
+Il cible les pods ayant le label app: django-app.
+
+
+```
+    spec:
+      containers:
+        - name: django
+          image: localhost/django-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5005
+```
+
+🔍 Détail de containers
+
+| Champ             | Description                                                                 |
+|-------------------|-----------------------------------------------------------------------------|
+| `name: django`    | Nom interne du container                                                    |
+| `image`           | Image Docker à utiliser. Ici : `localhost/django-app:latest`                |
+| `imagePullPolicy` | `Never` indique à Kubernetes de ne pas essayer de tirer l'image (locale)    |
+| `ports`           | Liste des ports exposés par le container (ici, le port `5005`)              |
+
+
 Fichier : k8s/django-service.yml
 ```yaml
 apiVersion: v1
@@ -351,6 +443,19 @@ spec:
       targetPort: 5005
   type: ClusterIP
 ```
+
+| Champ        | Description                                                                 |
+|--------------|-----------------------------------------------------------------------------|
+| `apiVersion` | Version de l'API Kubernetes utilisée. Ici : `v1`                            |
+| `kind`       | Type de ressource définie : `Service` signifie qu’on expose une application |
+| `metadata`   | Métadonnées (comme `name`) pour identifier le service                       |
+| `name`       | Nom du service Kubernetes : `django-service`                                |
+| `spec`       | Spécifie la configuration du service (ports, type, selector, etc.)          |
+| `selector`   | Associe le service au pod ayant le label `app: django-app`                  |
+| `ports`      | Liste des ports pour accéder à l'application                                |
+| `port`       | Port exposé par le service (port accessible depuis le cluster)              |
+| `targetPort` | Port du container cible (ici `5005`)                                        |
+| `type`       | `ClusterIP` signifie que le service est accessible uniquement dans le cluster |
 
 ## ⚙️ Déploiement de l'application Next.js (port 9090)
 Fichier : k8s/next-js-deployment.yaml
