@@ -214,7 +214,6 @@ Dockerfile
 .dockerignore
 ```
 ![image](https://github.com/user-attachments/assets/57576e4b-8513-43d7-9a08-117c79ead657)
-![image](https://github.com/user-attachments/assets/61c8cab3-5f11-4651-b1ee-567f81136825)
 
 # 📦 2. Application secondaire – Next.js
 ## Fichier : hello-world-next-js/Dockerfile
@@ -339,6 +338,8 @@ Dockerfile
 .dockerignore
 ```
 
+![image](https://github.com/user-attachments/assets/f13d0ec4-9251-4f75-8c7d-147ca1d14817)
+
 ## 🌐 Ingress Kubernetes
 
 Le fichier suivant permet de définir un Ingress unique exposant les trois applications sur un seul domaine (`projet.local`) avec des chemins distincts pour chaque service.
@@ -372,10 +373,7 @@ spec:
                   number: 8080
 ```
 
-💡 Il faut pas oublier d’ajouter la ligne suivante dans ton fichier /etc/hosts :
-```
-127.0.0.1 projet.local
-```
+![image](https://github.com/user-attachments/assets/61c8cab3-5f11-4651-b1ee-567f81136825)
 
 # 📦 Déploiement des applications Kubernetes
 
