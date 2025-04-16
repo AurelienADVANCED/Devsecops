@@ -564,20 +564,6 @@ k apply -f k8s/flask-deployment.yml
 k apply -f k8s/flask-service.yml
 ```
 
-## 🔁 Commandes `port-forward` (accès local aux applications)
-
-```bash
-# Django (exposé en local sur le port 80)
-k port-forward svc/django-service 80:80
-
-# Flask (exposé en local sur le port 8080)
-k port-forward svc/flask-service 8080:8080
-
-# Next.js (exposé en local sur le port 9090)
-k port-forward svc/next-service 9090:9090
-```
-📌 Ces commandes doivent être lancées dans des terminaux séparés, pour que chaque redirection reste active.
-
 ## 🖼️ Captures d'écran du projet
 
 ### 🧩 Application 1 : Django
