@@ -54,7 +54,7 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 
 | Application | Port dans le pod | Redirection locale (port-forward)    | Commande à exécuter                                     |
 |-------------|------------------|--------------------------------------|----------------------------------------------------------|
-| Django      | 5005             | `http://localhost:8081`              | `k port-forward svc/django-service 8081:80`        |
+| Django      | 80             | `http://localhost:8081`              | `k port-forward svc/django-service 8081:80`        |
 | Flask       | 8080             | `http://localhost:8082`              | `k port-forward svc/flask-service 8082:8080`       |
 | Next.js     | 9090             | `http://localhost:8083`              | `k port-forward svc/next-js-service 8083:9090`     |
 
