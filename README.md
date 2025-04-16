@@ -348,8 +348,8 @@ spec:
 
 # 📦 Déploiement des applications Kubernetes
 
-## ⚙️ Déploiement de l'application statique NGINX (port 9090)
-Fichier : k8s/nginx-deployment.yaml
+## ⚙️ Déploiement de l'application statique Next.js (port 9090)
+Fichier : k8s/next-js-deployment.yaml
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -372,7 +372,7 @@ spec:
           ports:
             - containerPort: 9090
 ```
-Fichier : k8s/nginx-service.yaml
+Fichier : k8s/next-js-service.yaml
 
 ```yaml
 apiVersion: v1
