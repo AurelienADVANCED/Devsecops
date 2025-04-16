@@ -79,7 +79,7 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 ![image](https://github.com/user-attachments/assets/87e260df-18c0-4d26-a4f1-fa5b158c9140)
 
 📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
-📂 Tous les fichiers Kubernetes (`Deployment`, `Service`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
+📂 Tous les fichiers Kubernetes (`Deployment`, `Service`, `Ingress`) sont regroupés dans le dossier `k8s/` pour plus de clarté.
 
 ---
 
