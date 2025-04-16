@@ -192,6 +192,21 @@ CMD ["gunicorn", "--bind", "0.0.0.0:9090", "app:app"]
 docker build -t flask-app:1.0 ./flask-soft
 ```
 
+🔐 .dockerignore pour flask-soft/ (Flask)
+```dockerfile
+__pycache__/
+*.py[cod]
+*.log
+.env
+venv/
+instance/
+node_modules/
+.git/
+.gitignore
+Dockerfile
+docker-compose.yml
+```
+
 ## 🌐 Ingress Kubernetes
 
 Le fichier suivant permet de définir un Ingress unique exposant les trois applications sur un seul domaine (`projet.local`) avec des chemins distincts pour chaque service.
