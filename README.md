@@ -4,6 +4,19 @@
 **Binôme : Aurian BOHN**  
 **Date : 16 avril 2025**
 
+## 📚 Sommaire
+
+1. [🎯 Objectif du projet](#-objectif-du-projet)  
+2. [🏗️ Architecture cible](#-architecture-cible)  
+3. [📁 Organisation du projet](#-organisation-du-projet)  
+4. [🔧 Étapes de réalisation](#-étapes-de-réalisation)  
+5. [🐳 Création des images Docker](#-création-des-images-docker)  
+6. [🚀 Optimisation des images Docker](#-optimisation-de-limage-docker-django)  
+7. [🌐 Ingress Kubernetes](#-ingress-kubernetes)  
+8. [📦 Déploiement des applications Kubernetes](#-déploiement-des-applications-kubernetes)  
+9. [🚀 Commandes de déploiement Kubernetes](#-commandes-de-déploiement-kubernetes)  
+10. [✅ Conclusion](#-conclusion)
+
 ---
 
 ## 🎯 Objectif du projet
