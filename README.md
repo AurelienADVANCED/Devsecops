@@ -442,7 +442,6 @@ spec:
 Voici les commandes à exécuter pour déployer tous les composants dans le cluster :
 
 ```bash
-# Appliquer la ConfigMap si présente
 k apply -f k8s/configmap.yml
 
 # Déployer l'application Django
