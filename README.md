@@ -106,8 +106,9 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app.wsgi"]
 ```
 
 # Commande de build :
+```
 docker build -t django-app:1.0 ./django-app
-
+```
 # 📦 2. Application Node.js (port 8080)
 ## Fichier : node-app/Dockerfile
 ```dockerfile
