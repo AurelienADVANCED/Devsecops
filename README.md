@@ -39,11 +39,11 @@ L’architecture repose sur un cluster Kubernetes local (via Minikube), héberge
 ### 🔀 Schéma logique
 
 ```
-             Navigateur / Client
-                     │
-                     ▼
-              [ Ingress NGINX ]
-                     │
+           Navigateur / Client
+                    │
+                    ▼
+            [ Ingress NGINX ]
+                    │
    ┌────────────────┼────────────────┐
    │                │                │
    ▼                ▼                ▼
