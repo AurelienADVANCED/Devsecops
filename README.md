@@ -75,8 +75,6 @@ Chaque application est exposée en local sur les ports spécifiés dans la consi
 ---
 ## 📁 Organisation du projet
 
-![archi](https://github.com/user-attachments/assets/bfe1808c-635e-4e2f-ab4c-ad056e292bce)
-
 ![image](https://github.com/user-attachments/assets/87e260df-18c0-4d26-a4f1-fa5b158c9140)
 
 📦 Chaque application dispose de son propre dossier avec son `Dockerfile`.  
@@ -362,6 +360,7 @@ Cette commande permet d'afficher tous les services Kubernetes déployés dans le
 
 🔒 Accès restreint par Minikube
 Nous avons effectué un port-forward sur le port 80 (utilisé initialement par l’Ingress), car Minikube ne permet pas d’accéder directement aux adresses IP internes depuis l’extérieur de la VM. Ce port-forward permet ainsi un accès local à l'application via localhost.
+
 ![image](https://github.com/user-attachments/assets/c2db467b-7c3d-42dc-bff3-ceecb4224d60)
 
 # 📦 Déploiement des applications Kubernetes
