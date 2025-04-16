@@ -13,8 +13,9 @@
 5. [🐳 Création des images Docker](#-création-des-images-docker)  
 6. [🚀 Optimisation des images Docker](#-optimisation-de-limage-docker-django)  
 7. [📦 Déploiement des applications Kubernetes](#-déploiement-des-applications-kubernetes)  
-8. [🚀 Commandes de déploiement Kubernetes](#-commandes-de-déploiement-kubernetes)  
-9. [✅ Conclusion](#-conclusion)
+8. [🚀 Commandes de déploiement Kubernetes](#-commandes-de-déploiement-kubernetes)
+9. [ℹ️ Concepts DevSecOps & Kubernetes](#️-concepts-devsecops--kubernetes)  
+10. [✅ Conclusion](#-conclusion)
 
 ---
 
@@ -485,6 +486,38 @@ k port-forward svc/next-service 9090:9090
 ![image](https://github.com/user-attachments/assets/87be0d10-777e-432c-91fd-b6a593aed750)
 
 ![image](https://github.com/user-attachments/assets/154ab717-26ab-4853-a6e5-24943d8e0a0c)
+
+## ℹ️ Concepts DevSecOps & Kubernetes
+
+### 🐳 Docker – Conteneurisation
+
+Docker est un outil permettant de **créer, déployer et exécuter des applications dans des conteneurs**. Chaque conteneur regroupe l’application, ses dépendances, et sa configuration. Cela garantit que l’application se comporte de la même manière sur tous les environnements (développement, test, production).
+
+Dans notre projet :
+- Chaque application dispose de son propre `Dockerfile`.
+
+### ☸️ Kubernetes – Orchestration de conteneurs
+
+Kubernetes est une plateforme open source qui automatise :
+- Le **déploiement** de conteneurs
+- Leur **mise à l’échelle**
+- La **récupération automatique** en cas de crash
+- Le **réseau entre les services**
+
+#### 🔧 Principaux objets Kubernetes utilisés :
+
+| Objet | Description |
+|-------|-------------|
+| `Pod` | Plus petite unité déployable, contient un ou plusieurs conteneurs. |
+| `Deployment` | Gère le cycle de vie des Pods (ex. nombre de réplicas, mises à jour). |
+| `Service` | Expose les Pods et permet la communication avec d'autres composants. |
+| `Port-forward` | Permet d'accéder aux Services en local depuis un terminal. |
+
+#### 🎛️ Types de Services
+
+- `ClusterIP` : service interne au cluster (par défaut)
+- `NodePort` : accessible via l’IP du nœud et un port spécifique (externe)
+- `LoadBalancer` : crée un load balancer externe (fonctionne avec Minikube en tunnel ou dans le cloud)
 
 ## ✅ Conclusion
 
