@@ -349,35 +349,27 @@ Le fichier suivant permet de définir un Ingress unique exposant les trois appli
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: projet-ingress
+  name: app-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: projet.local
-    http:
-      paths:
-      - path: /django
-        pathType: Prefix
-        backend:
-          service:
-            name: django-service
-            port:
-              number: 80
-      - path: /node
-        pathType: Prefix
-        backend:
-          service:
-            name: nextjs-service
-            port:
-              number: 8080
-      - path: /flask
-        pathType: Prefix
-        backend:
-          service:
-            name: flask-service
-            port:
-              number: 9090
+    - http:
+        paths:
+          - path: /django
+            pathType: Prefix
+            backend:
+              service:
+                name: django-service
+                port:
+                  number: 80
+          - path: /flask
+            pathType: Prefix
+            backend:
+              service:
+                name: flask-service
+                port:
+                  number: 8080
 ```
 
 💡 Il faut pas oublier d’ajouter la ligne suivante dans ton fichier /etc/hosts :
