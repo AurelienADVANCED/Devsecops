@@ -386,7 +386,7 @@ spec:
 
 ## 🚀 Commandes de déploiement Kubernetes
 
-Voici les commandes à exécuter pour déployer tous les composants dans ton cluster :
+Voici les commandes à exécuter pour déployer tous les composants dans le cluster :
 
 ```bash
 # Appliquer la ConfigMap si présente
