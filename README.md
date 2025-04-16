@@ -122,7 +122,7 @@ docker build -t localhost/django-app:latest .
 
 # Charger l'image dans Minikube :
 ```
-minikube image load django-app:latest
+minikube image load localhost/django-app:latest
 ```
 
 ![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
@@ -286,12 +286,12 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8080", "run:app"]
 
 # Commande de build :
 ```
-docker build -t flask-app:latest .
+docker build -t localhost/flask-app:latest .
 ```
 
 # Charger l'image dans Minikube :
 ```
-minikube image load flask-app:latest
+minikube image load localhost/flask-app:latest
 ```
 
 🔐 .dockerignore
