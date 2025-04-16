@@ -229,7 +229,7 @@ spec:
 
 ⚙️ Déploiement de l'application statique NGINX (port 9090)
 # Fichier : k8s/nginx-deployment.yaml
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -252,7 +252,7 @@ spec:
 ```
 Fichier : k8s/nginx-service.yaml
 
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
