@@ -464,6 +464,7 @@ k port-forward svc/flask-service 8080:8080
 # Next.js (exposé en local sur le port 9090)
 k port-forward svc/next-service 9090:9090
 ```
+📌 Ces commandes doivent être lancées dans des terminaux séparés, pour que chaque redirection reste active.
 
 ## 🖼️ Captures d'écran du projet
 
