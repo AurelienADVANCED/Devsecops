@@ -103,7 +103,12 @@ CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 
 # Commande de build :
 ```
-docker build -t django-app:latest .
+docker build -t localhost/django-app:latest .
+```
+
+# Charger l'image dans Minikube :
+```
+minikube image load django-app:latest
 ```
 
 ![image](https://github.com/user-attachments/assets/c264f25f-557f-4e4c-ba0e-772e79b314c1)
@@ -267,7 +272,12 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8080", "run:app"]
 
 # Commande de build :
 ```
-docker build -t flask-app:1.0 ./flask-soft
+docker build -t flask-app:latest .
+```
+
+# Charger l'image dans Minikube :
+```
+minikube image load flask-app:latest
 ```
 
 🔐 .dockerignore
@@ -443,8 +453,6 @@ spec:
 Voici les commandes à exécuter pour déployer tous les composants dans le cluster :
 
 ```bash
-k apply -f k8s/configmap.yml
-
 # Déployer l'application Django
 k apply -f k8s/django-deployment.yml
 k apply -f k8s/django-service.yml
