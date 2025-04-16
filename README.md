@@ -97,3 +97,56 @@ CMD ["node", "server.js"]
 ```
 docker build -t node-app:1.0 ./node-app
 ```
+
+# 📦 3. Application statique NGINX (port 9090)
+## Fichier : nginx-app/Dockerfile
+```dockerfile
+FROM nginx:alpine
+COPY ./index.html /usr/share/nginx/html/index.html
+```
+
+# Commande de build :
+```
+docker build -t nginx-app:1.0 ./nginx-app
+```
+
+## 🌐 Ingress Kubernetes
+
+Le fichier suivant permet de définir un Ingress unique exposant les trois applications sur un seul domaine (`projet.local`) avec des chemins distincts pour chaque service.
+
+**Fichier : `k8s/ingress.yaml`**
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: projet-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: projet.local
+    http:
+      paths:
+      - path: /django
+        pathType: Prefix
+        backend:
+          service:
+            name: django-service
+            port:
+              number: 80
+      - path: /node
+        pathType: Prefix
+        backend:
+          service:
+            name: node-service
+            port:
+              number: 8080
+      - path: /nginx
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 9090
+```
