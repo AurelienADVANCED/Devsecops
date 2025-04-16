@@ -509,6 +509,7 @@ k apply -f k8s/flask-service.yml
 ### 🧩 Application 3 : Next.js
 
 ![image](https://github.com/user-attachments/assets/1e16ef1b-b204-468a-ba55-c60bf3f36e4d)
+
 ![image](https://github.com/user-attachments/assets/154ab717-26ab-4853-a6e5-24943d8e0a0c)
 
 ## ✅ Conclusion
