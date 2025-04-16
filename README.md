@@ -355,7 +355,13 @@ spec:
                   number: 9090
 ```
 
-![image](https://github.com/user-attachments/assets/61c8cab3-5f11-4651-b1ee-567f81136825)
+🔍 Commande minikube service list
+Cette commande permet d'afficher tous les services Kubernetes déployés dans le cluster Minikube, ainsi que leurs informations d'exposition (ClusterIP, NodePort ou LoadBalancer).
+![image](https://github.com/user-attachments/assets/5407b0df-49aa-402a-b431-a987de59fe07)
+
+🔒 Accès restreint par Minikube
+Nous avons effectué un port-forward sur le port 80 (utilisé initialement par l’Ingress), car Minikube ne permet pas d’accéder directement aux adresses IP internes depuis l’extérieur de la VM. Ce port-forward permet ainsi un accès local à l'application via localhost.
+![image](https://github.com/user-attachments/assets/c2db467b-7c3d-42dc-bff3-ceecb4224d60)
 
 # 📦 Déploiement des applications Kubernetes
 
