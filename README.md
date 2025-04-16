@@ -333,7 +333,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /django
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -351,7 +351,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: next-js-service
+                name: next-service
                 port:
                   number: 9090
 ```
@@ -444,11 +444,10 @@ metadata:
 spec:
   selector:
     app: django-app
+  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 80
       targetPort: 5005
-  type: ClusterIP
 ```
 
 | Champ        | Description                                                                 |
@@ -498,11 +497,10 @@ metadata:
 spec:
   selector:
     app: next-app
+  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 9090
+    - port: 9090
       targetPort: 9090
-  type: ClusterIP
 ```
 
 ## ⚙️ Déploiement de l'application Flask (port 8080)
@@ -542,11 +540,10 @@ metadata:
 spec:
   selector:
     app: flask-app
+  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 8080
+    - port: 8080
       targetPort: 8080
-  type: ClusterIP
 ```
 
 ## 🚀 Commandes de déploiement Kubernetes
