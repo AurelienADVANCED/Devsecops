@@ -89,41 +89,43 @@ minikube addons enable ingress
 ```dockerfile
 FROM python:3.11-alpine
 
-# Eviter l'écriture de fichiers pyc + affichage live dans le terminal
+# Env vars
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Installation des dépendances système
+# Dépendances système
 RUN apk update && apk add --no-cache \
-    build-base \
-    python3-dev \
-    libffi-dev \
-    musl-dev \
     gcc \
+    python3-dev \
+    musl-dev \
+    libffi-dev \
     jpeg-dev \
     zlib-dev \
     postgresql-dev \
-    mariadb-dev \
-    linux-headers
+    build-base \
+    linux-headers \
+    libxml2-dev \
+    libxslt-dev \
+    && pip install --upgrade pip
 
-# Dossier de travail
 WORKDIR /app
 
-# Copier requirements en premier pour profiter du cache
+# Copier uniquement requirements.txt pour tirer parti du cache Docker
 COPY requirements.txt .
 
-# Installer les dépendances
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier tout le reste du code
+# Copier le code de l'app
 COPY . .
 
-# Port exposé : 8080 (selon les besoins du client)
-EXPOSE 8080
+# Collecte des fichiers statiques & migrations
+RUN python manage.py collectstatic --noinput && \
+    python manage.py makemigrations && \
+    python manage.py migrate
 
-# Lancement de l’app avec Gunicorn en mode production
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "run:app"]
+EXPOSE 5005
+
+CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 ```
 
 🔐 .dockerignore
