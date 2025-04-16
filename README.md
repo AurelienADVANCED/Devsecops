@@ -454,20 +454,21 @@ Fichier : k8s/nginx-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: next-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: next-app
   template:
     metadata:
       labels:
-        app: nginx
+        app: next-app
     spec:
       containers:
-        - name: nginx
-          image: nginx-app:1.0
+        - name: nextjs
+          image: localhost/next-js-app:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 9090
 ```
@@ -477,14 +478,15 @@ Fichier : k8s/nginx-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: next-service
 spec:
-  type: LoadBalancer
   selector:
-    app: nginx
+    app: next-app
   ports:
-    - port: 9090
+    - protocol: TCP
+      port: 9090
       targetPort: 9090
+  type: ClusterIP
 ```
 
 ## 🚀 Commandes de déploiement Kubernetes
