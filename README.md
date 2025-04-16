@@ -462,7 +462,7 @@ k apply -f k8s/flask-service.yml
 
 ### 🧩 Application 2 : Flask
 
-![image](https://github.com/user-attachments/assets/e29c91cc-97ce-4a4a-813f-c5fff5e569fc)
+![image](https://github.com/user-attachments/assets/d600b30e-71ed-454f-a298-79d11d75a8e2)
 ![image](https://github.com/user-attachments/assets/f248fd82-a62c-4f6d-a775-cdb279b94887)
 
 ### 🧩 Application 3 : Next.js
