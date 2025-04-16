@@ -228,12 +228,12 @@ CMD ["npm", "start"]
 ```
 ## Commande de build :
 ```
-docker build -t localhost/nextjs-app:1.0 .
+docker build -t localhost/next-js-app:latest .
 ```
 
 ## Charger l’image dans Minikube :
 ```
-docker build -t localhost/nextjs-app:1.0 .
+minikube image load localhost/next-js-app:latest
 ```
 
 🔐 .dockerignore
